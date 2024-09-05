@@ -50,6 +50,7 @@ def process_audio(audio):
                 except Exception as e:
                     print(f"error: {e}")
     else:
+        tik = time.time()
         for chunk in omni_client.run_AT_batch_stream(filepath):
             # Convert chunk to numpy array
             if cnt == 0:
@@ -70,9 +71,9 @@ def main(port=None):
         live=True,
     )
     if port is not None:
-        demo.queue().launch(share=False, server_name="0.0.0.0", server_port=port)
+        demo.queue().launch(share=False, server_name="0.0.0.0", server_port=port, root_path='/omni')
     else:
-        demo.queue().launch()
+        demo.queue().launch(root_path='/omni')
 
 
 if __name__ == "__main__":
